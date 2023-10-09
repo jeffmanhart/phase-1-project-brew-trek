@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="index.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <title>Brew Trek</title>
+</head>
+<body>
+    <header>
+        <h1>Brew Trek</h1>
+      </header>
+
+    <div class="search-radio-buttons">
+        <input type="radio" id="name" name="searchOption" >Brewery name</label>
+        <input type="radio" id="city" name="searchOption">City</label>
+        <input type="radio" id="state"name="searchOption">State</label>
+        <input type="radio" id="zipcode" name="searchOption">ZIP/Postal code</label>
+    </div>
+    <div class="search-field-and-button">
+        <input type="text" name="searchBar" placeholder="Enter text" class="search-bar" value="">
+        <button type="submit">Submit</button>
+    </div>
+    <div class="container">
+        <div class="column" id="search-results">
+            <div class="brewery-list">
+                <ul>
+                    <p>placholder for display</p>
+                    <!-- brewery results should get displayed here -->
+                </ul>
+            </div>
+        </div>
+        <div class="column" id="tour-builder">
+            <div class="brewery-list">
+                <ul>
+                    <p>placholder for display</p>
+                    <!-- brewery additions should go here to add to the tour listing -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
