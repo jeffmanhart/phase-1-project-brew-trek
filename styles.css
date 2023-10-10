@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('Brewery.jpg');
+    background-image: url('beerAstronaut.jpg');
     background-size: cover;
   }
   
@@ -23,14 +23,6 @@
     background-color: gold;
   }
   
-  form {
-    margin: 1rem 0;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
   .search-radio-buttons {
     font-size: 1rem;
     border: 1px solid black;
@@ -39,14 +31,35 @@
     margin: 0.25rem 0;
   }
   .container{
-    column-count: 2;
-    column-width: 45%;
-    margin: 1rem;
+    display: flex;
+    width: 95%;
   }
   .column{
     background-color: rgb(255,215,0, .5);
     border: 2px solid black;
-    padding: 10px;
-    margin: 0 0 1em 0;
+    width:50%;
+    margin: 5px;
   }
 
+  .brewery-info {
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 1px;
+    padding: .5px;
+    display: flex;
+    border: 2px solid black;
+  }
+
+  .brewery-info li {
+    list-style: none;
+    align-items: center;
+    margin: auto;
+  }
+
+.addTour{
+    display:flex;
+    margin: auto;
+    background-color: rgb(255,215,0, .8);
+    border: 2px solid black;
+}

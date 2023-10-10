@@ -30,4 +30,4 @@ se-flex-phase-1-project
 
 ## Sources
 - Brewery Data from https://www.openbrewerydb.org
-- Background image provided by travelzoo.com
+- Background image provided by wallpaperaccess.com
