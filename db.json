@@ -1,0 +1,11 @@
+{
+    "tours": [
+        {
+            "id": 1, 
+            "name": "Jeff's Fave",
+            "selectedBreweries": {
+                
+            }
+        }
+    ]
+}

@@ -3,13 +3,15 @@ const breweryURL = 'https://api.openbrewerydb.org/v1/breweries?'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const searchForm = document.querySelector('.search-field-and-button')
+    //submit button event listener
+    //suppress default behavior
     searchForm.addEventListener('submit',(e)=>{
         e.preventDefault();
 
         const radioBtns = document.getElementsByName('searchOption')
         const searchTerm = document.getElementById('search-bar')
         let searchBy
-
+        //iterate through array of elements to get the id selected which is also what the search query uses for openbrewery API when fetching
         radioBtns.forEach(element => {
             if(element.checked){
                 if(element.id === 'savedTour'){
@@ -36,20 +38,19 @@ function getBreweriesBy(option ='', keyword){
     })
 }
 
-//submit button event listener
-//suppress default behavior
+
 
 
 //add tour button event listener
-//moves brewry to other column 
-//adds a save button in the top column
-//changes to remove button
+//duplicates brewry to other column 
+//adds a save name input and button in the top column if first addition
+// add btn changes to remove button
 
 
-//remove button takes brewery off tour list and adds back to brew list
+//remove button takes brewery off tour list
 
 
-//sort by brewery-type
+//sort by brewery-type maybe not want to do this one
 
 
 //Post tour information to DB.json
