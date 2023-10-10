@@ -14,15 +14,16 @@
       </header>
 
     <div class="search-radio-buttons">
-        <input type="radio" id="name" name="searchOption" >Brewery name</label>
-        <input type="radio" id="city" name="searchOption">City</label>
-        <input type="radio" id="state"name="searchOption">State</label>
-        <input type="radio" id="zipcode" name="searchOption">ZIP/Postal code</label>
+        <input type="radio" id="by_name" name="searchOption" >Brewery name</label>
+        <input type="radio" id="by_city" name="searchOption">City</label>
+        <input type="radio" id="by_state"name="searchOption">State</label>
+        <input type="radio" id="by_postal" name="searchOption">Zipcode</label>
+        <input type="radio" id="savedTour" name="searchOption">Saved Tour</label>
     </div>
-    <div class="search-field-and-button">
-        <input type="text" name="searchBar" placeholder="Enter text" class="search-bar" value="">
+    <form class="search-field-and-button">
+        <input type="text" name="searchBar" placeholder="Enter text" id="search-bar" value="">
         <button type="submit">Submit</button>
-    </div>
+    </form>
     <div class="container">
         <div class="column" id="search-results">
             <h3>Breweries</h3>
