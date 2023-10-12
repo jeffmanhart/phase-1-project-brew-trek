@@ -2,14 +2,16 @@
 
 # Brew Trek
 
-Brew Trek is an application to allow users to discover breweries by city, zip code, or all.  Breweries will be displayed and give users the ability to build a brewery tour that makes sense to them or within walking distance of eachother.  From the list you build users can save that list of breweries for future use or other users to follow.  These will allow for ratings and the ability to find them again.
+Brew Trek is an application to allow users to discover breweries by city, zip code, or all.  Breweries will be displayed and give users the ability to build a brewery trek that makes sense to them or within walking distance of eachother.  From the list you build users can save that list of breweries for future use or other users to follow.  These will allow for ratings and the ability to find them again.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
+Use the Json Server to be able to save and retrieve treks from the local db.  
+First install the server globally.  
+Then start the server and let it run.
 ```bash
-npm i
+npm install -g json-server
+json-server --watch db.json
 ```
 
 ## Usage

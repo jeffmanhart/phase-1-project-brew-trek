@@ -1,5 +1,6 @@
 
 const breweryURL = 'https://api.openbrewerydb.org/v1/breweries?'
+const trekURL = 'http://localhost:3000/treks/'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const searchForm = document.querySelector('.search-field-and-button')
@@ -16,15 +17,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(element.checked){
                 if(element.id === 'savedTrek'){
                     clearOldSearch('trek')
-                    console.log('This is where we will do the Trek search')
+                    getSavedTrek(searchTerm.value)
                 }else{
                     clearOldSearch('brewList')
                     searchBy = element.id
+                    getBreweriesBy(searchBy, searchTerm.value)
                 }
             }
         });
     
-    getBreweriesBy(searchBy, searchTerm.value)
+    
     })
 })
 
@@ -40,55 +42,76 @@ function clearOldSearch(list){
 
 //display list of breweries
 function createBreweryCards(){
-    const breweryList = document.getElementById('search-results')
-    const trekList = document.getElementById('trek-builder')
     
     let breweryCards = this.map((e)=>{
-        console.log(e)
         let card = document.createElement('div')
+        let btn = document.createElement('button')
+        btn.id = e.name + "Add"
+        btn.className = "addToTrek"
+        btn.textContent ='+'
+        //add trek button event listener
+        btn.addEventListener('click', (e)=>{
+            console.log(e.target)
+            moveCard(e.target)
+        })
         card.className = "brewery-info"
         card.innerHTML = `<ul>
-            <li style="font-weight: bold;">${e.name}</li>
-            <li>${e.street}</li>
-            <li>${e.city}, ${e.state} ${e.postal_code}</li>
+            <li style="font-weight: bold;" id="name">${e.name}</li>
+            <li id ="line1">${e.street}</li>
+            <li id= "line2">${e.city}, ${e.state} ${e.postal_code}</li>
         </ul>
         <div class="brewery-type">${e.brewery_type}</div>
-        <button class="addToTrek">+</button>
         </div>`
-        console.log(card)
+        card.appendChild(btn)
+        
         return card
     })
-    console.log(breweryCards)
-    breweryList.append(...breweryCards)
-
+    return breweryCards
 
 }
+
 
 //fetching the brewery list from https://www.openbrewerydb.org
 function getBreweriesBy(option ='', keyword){
+    let breweryCards
     fetch(breweryURL+`${option}=${keyword}`)
     .then(res=>res.json())
     .then(brews=>{
-        createBreweryCards.call(brews)
+        breweryCards = createBreweryCards.call(brews)
+        const breweryList = document.getElementById('search-results')
+        //TODO: ask why the spread operator in front of the array of html elements works but returns just the [object HTMLDivElement] when not present, 
+        //not sure why but the internet showed this with no explanation
+        breweryList.append(...breweryCards)
     })
+    
 }
 
 
 
 
-//add trek button event listener
-//duplicates brewry to other column 
-//adds a save name input and button in the top column if first addition
-// add btn changes to remove button
 
+//moves brewry to other column 
+//adds a save name input and button in the top column if first addition
+//add btn changes to remove button
+function moveCard(element){
+    const trekList = document.getElementById('trek-builder')
+    const oldParent = element.parentNode
+    trekList.appendChild(oldParent)
+}
 
 //remove button takes brewery off trek list
-
-
-//sort by brewery-type maybe not want to do this one
 
 
 //Post trek information to DB.json
 
 
 //Get saved trek data and display in correct column
+function getSavedTrek(trekName){
+    fetch(trekURL)
+    .then(res=>res.json())
+    .then(brews=>{
+        breweryCards = createBreweryCards.call(brews)
+        const trekList = document.getElementById('search-results')
+        trekList.append(...breweryCards)
+    })
+}
