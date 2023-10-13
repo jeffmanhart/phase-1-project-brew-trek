@@ -1,11 +1,58 @@
 {
-    "treks": [
-        {
-            "id": 1, 
-            "name": "Jeff's Fave",
-            "selectedBreweries": {
-                
-            }
-        }
-    ]
+  "treks": [
+    {
+      "id": 1,
+      "name": "Jeff's Fave",
+      "selectedBreweries": []
+    },
+    {
+      "name": "newOne",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645",
+        "f5bcfd6a-160a-4d65-a5b7-834564023123"
+      ],
+      "id": 2
+    },
+    {
+      "name": "newOne",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 3
+    },
+    {
+      "name": "newOne",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 4
+    },
+    {
+      "name": "newOne",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 5
+    },
+    {
+      "name": "newone",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 6
+    },
+    {
+      "name": "newOne",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 7
+    }
+  ]
 }

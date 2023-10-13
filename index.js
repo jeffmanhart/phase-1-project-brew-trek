@@ -1,6 +1,6 @@
 
 const breweryURL = 'https://api.openbrewerydb.org/v1/breweries?'
-const trekURL = 'http://localhost:3000/treks/'
+const trekURL = 'http://localhost:3000/treks'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const searchForm = document.querySelector('.search-field-and-button')
@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(element.checked){
                 if(element.id === 'savedTrek'){
                     clearOldSearch('trek')
-                    getSavedTrek(searchTerm.value)
+                    const savedTrek = getSavedTrek(searchTerm.value)
+                    const trekList = document.getElementById('trek-builder')
+                    trekList.append(savedTrek)
                 }else{
                     clearOldSearch('brewList')
                     searchBy = element.id
@@ -51,10 +53,10 @@ function createBreweryCards(){
         btn.textContent ='+'
         //add trek button event listener
         btn.addEventListener('click', (e)=>{
-            console.log(e.target)
             moveCard(e.target)
         })
         card.className = "brewery-info"
+        card.id = e.id
         card.innerHTML = `<ul>
             <li style="font-weight: bold;" id="name">${e.name}</li>
             <li id ="line1">${e.street}</li>
@@ -79,39 +81,84 @@ function getBreweriesBy(option ='', keyword){
     .then(brews=>{
         breweryCards = createBreweryCards.call(brews)
         const breweryList = document.getElementById('search-results')
-        //TODO: ask why the spread operator in front of the array of html elements works but returns just the [object HTMLDivElement] when not present, 
-        //not sure why but the internet showed this with no explanation
         breweryList.append(...breweryCards)
     })
     
 }
-
-
-
-
 
 //moves brewry to other column 
 //adds a save name input and button in the top column if first addition
 //add btn changes to remove button
 function moveCard(element){
     const trekList = document.getElementById('trek-builder')
+    if(document.querySelectorAll('#trek-builder .brewery-info').length === 0){
+        const saveTrekName = document.createElement('input')
+        saveTrekName.id = 'saveInput'
+        saveTrekName.placeholder="Name Your Trek"
+        const saveTrek = document.createElement('button')
+        saveTrek.id = 'saveBtn'
+        saveTrek.textContent = 'Save'
+        saveTrek.addEventListener('click',()=>{ 
+            postTrek()})
+        trekList.appendChild(saveTrekName)
+        trekList.appendChild(saveTrek)
+    }
+    
     const oldParent = element.parentNode
     trekList.appendChild(oldParent)
+    
 }
 
-//remove button takes brewery off trek list
 
 
 //Post trek information to DB.json
+function postTrek(){
+    const saveName = document.getElementById('saveInput')
+    let trekExists = getSavedTrek(saveName.value)
+    const trekCards = document.querySelectorAll('#trek-builder .brewery-info')
+    let brewCards =[]
+    Array.from(trekCards,(e)=>{
+        brewCards.push(e.id)
+    })
+    const body = {
+        "name": saveName.value,
+        "selectedBreweries": brewCards 
+    }
+    const message={
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'},
+        body:JSON.stringify(body)
+    }
+//TODO: I am unfortunately stumped on how I can best get this check in place to return before I do the post!
+//async / await?
+//still not working for the check but the POST works when removing the check!
+    
+    console.log(trekExists)
+    if(trekExists.length > 0){
+        alert("That Trek name has already been taken.  Please try a different Trek name")
+    } else{
+        fetch(trekURL, message)
+        .then(res=>res.json())
+        .then(b=>{
+            alert(`successfully saved ${saveName.value}Trek`)
+        })
+    }
+}
 
-
-//Get saved trek data and display in correct column
+//Get saved trek data
 function getSavedTrek(trekName){
-    fetch(trekURL)
+    let savedTrek 
+    
+    fetch(trekURL+'?name='+trekName)
     .then(res=>res.json())
     .then(brews=>{
-        breweryCards = createBreweryCards.call(brews)
-        const trekList = document.getElementById('search-results')
-        trekList.append(...breweryCards)
+        savedTrek = brews
+        console.log('infirst then' + savedTrek)
     })
+    .then(()=>{
+        console.log('innext then' + savedTrek)
+        return savedTrek
+    })
+    
 }
