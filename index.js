@@ -17,13 +17,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(element.checked){
                 if(element.id === 'savedTrek'){
                     clearOldSearch('trek')
-                    const savedTrek = getSavedTrek(searchTerm.value)
-                    const trekList = document.getElementById('trek-builder')
-                    trekList.append(savedTrek)
+                    getSavedTrek(searchTerm.value)
                 }else{
                     clearOldSearch('brewList')
                     searchBy = element.id
-                    getBreweriesBy(searchBy, searchTerm.value)
+                    getBreweriesBy(searchBy, searchTerm.value, "brewList")
                 }
             }
         });
@@ -74,14 +72,38 @@ function createBreweryCards(){
 
 
 //fetching the brewery list from https://www.openbrewerydb.org
-function getBreweriesBy(option ='', keyword){
+function getBreweriesBy(option ='', keyword, renderList){
     let breweryCards
+    console.log(breweryURL+`${option}=${keyword}`)
     fetch(breweryURL+`${option}=${keyword}`)
     .then(res=>res.json())
     .then(brews=>{
         breweryCards = createBreweryCards.call(brews)
-        const breweryList = document.getElementById('search-results')
-        breweryList.append(...breweryCards)
+        if(renderList === 'brewList'){
+            const breweryList = document.getElementById('search-results')
+            breweryList.append(...breweryCards)
+        }else if(renderList === 'trek'){
+            const trekList = document.getElementById('trek-builder')
+            trekList.append(...breweryCards)
+        }
+        
+    })
+    
+}
+
+//Get saved trek data, returns the trek Object
+function getSavedTrek(trekName){
+
+    fetch(trekURL+'?name='+trekName)
+    .then(res=>res.json())
+    .then(brews=>{
+        
+        if(!brews || !brews.length){
+            alert("Could not find the Trek you are looking for! Try building a new one!")
+        } else{
+            const breweries = brews[0].selectedBreweries
+            getBreweriesBy('by_ids',breweries.join(','), "trek")
+        }
     })
     
 }
@@ -141,19 +163,9 @@ async function postTrek(){
                 fetch(trekURL, message)
                     .then(res=>res.json())
                     .then(()=>{
-                        alert(`successfully saved ${saveName.value}Trek`)
+                        alert(`Successfully saved ${saveName.value} Trek!`)
                     })
             }
     })
 }
 
-//Get saved trek data, returns the trek Object
-function getSavedTrek(trekName){
-
-    fetch(trekURL+'?name='+trekName)
-    .then(res=>res.json())
-    .then(brews=>{
-        return brews
-    })
-    
-}
