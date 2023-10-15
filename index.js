@@ -98,8 +98,8 @@ function moveCard(element){
         const saveTrek = document.createElement('button')
         saveTrek.id = 'saveBtn'
         saveTrek.textContent = 'Save'
-        saveTrek.addEventListener('click',()=>{ 
-            postTrek()})
+        saveTrek.addEventListener('click',postTrek)
+            
         trekList.appendChild(saveTrekName)
         trekList.appendChild(saveTrek)
     }
@@ -112,9 +112,8 @@ function moveCard(element){
 
 
 //Post trek information to DB.json
-function postTrek(){
+async function postTrek(){
     const saveName = document.getElementById('saveInput')
-    let trekExists = getSavedTrek(saveName.value)
     const trekCards = document.querySelectorAll('#trek-builder .brewery-info')
     let brewCards =[]
     Array.from(trekCards,(e)=>{
@@ -130,35 +129,31 @@ function postTrek(){
             'Content-type':'application/json'},
         body:JSON.stringify(body)
     }
-//TODO: I am unfortunately stumped on how I can best get this check in place to return before I do the post!
-//async / await?
-//still not working for the check but the POST works when removing the check!
-    
-    console.log(trekExists)
-    if(trekExists.length > 0){
-        alert("That Trek name has already been taken.  Please try a different Trek name")
-    } else{
-        fetch(trekURL, message)
-        .then(res=>res.json())
-        .then(b=>{
-            alert(`successfully saved ${saveName.value}Trek`)
-        })
-    }
+    // I could not get a good solution to work when using callbacks or async/await or promises.  
+    // For whatever reason it never waited for a response from getSavedTrek(), 
+    // so I had to use this method for now to ensure I got the check working.
+    fetch(trekURL+'?name='+saveName.value)
+    .then(res=>res.json())
+    .then(brews=>{
+        if(brews.length > 0){
+            alert("That Trek name has already been taken.  Please try a different Trek name")
+            } else{
+                fetch(trekURL, message)
+                    .then(res=>res.json())
+                    .then(()=>{
+                        alert(`successfully saved ${saveName.value}Trek`)
+                    })
+            }
+    })
 }
 
-//Get saved trek data
+//Get saved trek data, returns the trek Object
 function getSavedTrek(trekName){
-    let savedTrek 
-    
+
     fetch(trekURL+'?name='+trekName)
     .then(res=>res.json())
     .then(brews=>{
-        savedTrek = brews
-        console.log('infirst then' + savedTrek)
-    })
-    .then(()=>{
-        console.log('innext then' + savedTrek)
-        return savedTrek
+        return brews
     })
     
 }
