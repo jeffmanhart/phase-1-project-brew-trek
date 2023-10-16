@@ -16,12 +16,14 @@ json-server --watch db.json
 
 ## Usage
 
-```javascript
-code examples
-```
+Brew Trek reaches out to open brewery DB to build the cards returned to the user.  The user can query by a name, state, city, or zip code.  
+The user can also query a local DB for searching treks previously saved.  The DB is seeded with a few existing treks such as "Colorado Brews".  The save only keeps the brewery unique IDs and then requeries the data from open brewery when retrieving the trek to get any updated details from the DB if there are any.
+
+
 ## Future Improvements
 - build a mapping capability to show the route to walk from one location to the next
 - provide a time calculation to alot for each location based on total time desired input 
+- add a rating to the treks after saved or retrieved
 
 
 ## Authors & Acknowledgement

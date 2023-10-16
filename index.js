@@ -154,6 +154,9 @@ async function postTrek(){
     // I could not get a good solution to work when using callbacks or async/await or promises.  
     // For whatever reason it never waited for a response from getSavedTrek(), 
     // so I had to use this method for now to ensure I got the check working.
+    if(saveName.value === ""){
+        alert("Please name your Trek.")
+    }else{
     fetch(trekURL+'?name='+saveName.value)
     .then(res=>res.json())
     .then(brews=>{
@@ -166,6 +169,6 @@ async function postTrek(){
                         alert(`Successfully saved ${saveName.value} Trek!`)
                     })
             }
-    })
+    })}
 }
 

@@ -5,9 +5,8 @@
       "name": "Jeff's Fave",
       "selectedBreweries": []
     },
-   
     {
-      "name": "1",
+      "name": "Aurora Jaunt",
       "selectedBreweries": [
         "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
         "05386e92-6e04-44c0-93a1-549eca0cc645"
@@ -15,7 +14,7 @@
       "id": 4
     },
     {
-      "name": "12",
+      "name": "Colorado Brews",
       "selectedBreweries": [
         "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
         "05386e92-6e04-44c0-93a1-549eca0cc645"
@@ -30,6 +29,30 @@
         "f5bcfd6a-160a-4d65-a5b7-834564023123"
       ],
       "id": 6
+    },
+    {
+      "name": "favorite places",
+      "selectedBreweries": [
+        "f5bcfd6a-160a-4d65-a5b7-834564023123",
+        "a2728fec-51dd-4613-b15d-fc53774003b2"
+      ],
+      "id": 7
+    },
+    {
+      "name": "ktrocks",
+      "selectedBreweries": [
+        "f5bcfd6a-160a-4d65-a5b7-834564023123",
+        "a2728fec-51dd-4613-b15d-fc53774003b2"
+      ],
+      "id": 8
+    },
+    {
+      "name": "saved",
+      "selectedBreweries": [
+        "dad10840-28ab-4dcf-9005-bf2cc2665b5a",
+        "05386e92-6e04-44c0-93a1-549eca0cc645"
+      ],
+      "id": 9
     }
   ]
 }
